@@ -1,0 +1,13 @@
+ {
+       "cinder-api": [
+             "{{ cinder_api_host1.host }}",
+             "{{ cinder_api.host2.host }}"
+               ],
+       "cinder-volume": [
+             "{{ cinder_volume_host.host }}"
+               ],
+       "cinder-scheduler": [
+             "{{ cinder_scheduler_host1.host }}",
+             "{{ cinder_scheduler_host2.host }}"
+               ]
+ }
