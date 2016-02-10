@@ -1,0 +1,50 @@
+Steps to configure Compute Nodes for using cinder-librbd services:
+
+1. Install python-rbd and ceph-common
+
+	sudo vim /etc/apt/sources.list.d/ceph.list
+	deb http://ceph.com/debian-hammer/ trusty main
+	wget -q -O- 'https://download.ceph.com/keys/release.asc' | sudo apt-key add -
+	sudo apt-get update
+	sudo apt-get install python-rbd ceph-common -y
+
+2. Copy provided keyring file ceph.client.cinder.keyring to /etc/ceph/
+	sudo cp <DOWNLOAD-PATH>/ceph.client.cinder.keyri:ng /etc/ceph/
+
+3. Change permissions of above keyring file
+	sudo chown cinder:cinder /etc/ceph/ceph.client.cinder.keyring
+
+4. Copy provided keyring file ceph.client.glance.keyring to /etc/ceph/
+	sudo cp <DOWNLOAD-PATH>/ceph.client.glance.keyring /etc/ceph/
+
+5. Change permissions of above keyring file
+	sudo chown cinder:cinder /etc/ceph/ceph.client.glance.keyring
+
+6. Copy provided ceph.conf file to /etc/ceph/
+	sudo cp <DOWNLOAD-PATH>/ceph.conf /etc/ceph.conf
+
+7. Update nova.conf:
+	[libvirt]
+	rbd_user = cinder
+	rbd_secret_uuid = 4eabc75-43f7-4313-aefd-eb5fe6be635a
+
+8. Update glance.conf:
+	[glance_store]
+	stores=rbd
+	default_store = rbd
+	rbd_store_user = glance
+	rbd_store_pool = images
+	rbd_store_chunk_size = 8
+	rbd_store_ceph_conf = /etc/ceph/ceph.conf
+
+9. Copy provided secret.xml file and client.cinder.key
+
+10. Create virutal(virtio) devices for librbd 
+	sudo virsh secret-define --file <DOWNLOAD-PATH>/secret.xml
+		**Output: Secret 4eabc75-43f7-4313-aefd-eb5fe6be635a created
+11. Use Secret key from above command's o/p
+	sudo virsh secret-set-value --secret 4eabc75-43f7-4313-aefd-eb5fe6be635a --base64 $(cat <DOWNLOAD-PATH>/client.cinder.key)
+
+12. Delete client.cinder.key and secret.xml
+	rm <DOWNLOAD-PATH>/client.cinder.key
+	rm  <DOWNLOAD-PATH>/secret.xml
