@@ -1,11 +1,14 @@
 {
        "cinder-api": [
-             "{{ cinder_api_hosts|map(attribute='hostname')|join(',') }}"
+             "{{ cinder_api_hosts|map(attribute='hostname')|join('","') }}"
                ],
        "cinder-volume": [
-             "{{ cinder_volume_hosts|map(attribute='hostname')|join(',') }}"
+             "{{ cinder_volume_hosts }}"
                ],
        "cinder-scheduler": [
-             "{{ cinder_scheduler_hosts|map(attribute='hostname')|join(',') }}"
+             "{{ cinder_scheduler_hosts|map(attribute='hostname')|join('","') }}"
+               ],
+       "cinder-backup": [
+             "{{ cinder_backup_hosts|map(attribute='hostname')|join('","') }}"
                ]
 }
