@@ -1,0 +1,3 @@
+Package: *
+Pin: release o=Jcssbs
+Pin-Priority: 1002
