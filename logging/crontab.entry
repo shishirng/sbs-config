@@ -1,0 +1,2 @@
+21 5 * * *  /home/ubuntu/compresslog.sh
+25 5 * * *  /home/ubuntu/loguploadtoDss.py

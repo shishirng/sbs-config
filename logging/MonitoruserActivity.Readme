@@ -1,0 +1,27 @@
+sudo vim /etc/bash.bashrc
+Append to the end of that file:
+
+export PROMPT_COMMAND='RETRN_VAL=$?;logger -p local6.debug "$(whoami) [$$]: $(history 1 | sed "s/^[ ]*[0-9]\+[ ]*//" ) [$RETRN_VAL]"'
+
+Set up logging for "local6" with a new file:
+
+sudo vim  /etc/rsyslog.d/bash.conf
+
+local6.*    /var/log/commands.log
+
+
+
+Restart rsyslog:
+
+sudo service rsyslog restart
+
+
+
+
+Log out. 
+
+
+Log in on machine again.
+
+
+
