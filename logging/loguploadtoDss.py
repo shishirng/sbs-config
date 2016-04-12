@@ -9,10 +9,8 @@ from datetime import date, timedelta
 import socket
 
 
-#access_key = 'AKIAIUWQZZZ4B7H446MQ'
-#secret_key = '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'
-access_key = '8483bfde053a49699cca0564bc845285'
-secret_key = '8c752c037cb54fd585e811573cd71475'
+access_key = 'dddddddddddddddddddddddddddddddd'
+secret_key = 'dddddddddddddddddddddddddddddddd'
 bucket_name = 'rahultest'
 key_name = 'loglocation/logfiles'
 file_path = '/home/ubuntu/logfile.gz'
@@ -51,7 +49,6 @@ conn = boto.connect_s3(host=host,aws_access_key_id=access_key, aws_secret_access
                        is_secure=True,
                        calling_format = boto.s3.connection.OrdinaryCallingFormat(),)
 
-backup_bucket = None
 
 #conn.create_bucket(bucket_name)
 b = conn.get_bucket(bucket_name,True)
