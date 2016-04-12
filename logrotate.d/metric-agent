@@ -1,0 +1,10 @@
+/var/log/metric-agent/*.log {
+    daily
+    rotate 30
+    missingok
+    compress
+    dateext
+    dateformat _%Y-%m-%d
+    copytruncate
+    notifempty
+}
