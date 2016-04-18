@@ -26,10 +26,10 @@ def getKeyName():
 	days_to_subtract=1
 	d = date.today() - timedelta(days=days_to_subtract)
 	machine_name=getMachineName()
-	month=d.month
+	month=`d.month`
 	if d.month<10:
 		month='0'+`d.month`	
-	day=d.day
+	day=`d.day`
 	if d.day<10:
 		day='0'+`d.day`	
 	key_name=key_name+'/'+`d.year`+'/'+month+'/'+day+'/'+machine_name+'.gz'
