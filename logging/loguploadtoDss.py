@@ -18,10 +18,6 @@ host = 'dss.ind-west-1.staging.jiocloudservices.com'
 
 
 def getMachineName():
-#	if socket.gethostname().find('.')>=0:
-#    		machine_name=socket.gethostname()
-#	else:
-#    		machine_name=socket.gethostbyaddr(socket.gethostname())[0]
     	machine_name=socket.gethostname()
         return machine_name
 
@@ -30,10 +26,10 @@ def getKeyName():
 	days_to_subtract=1
 	d = date.today() - timedelta(days=days_to_subtract)
 	machine_name=getMachineName()
-	month=d.month
+	month=`d.month`
 	if d.month<10:
 		month='0'+`d.month`	
-	day=d.day
+	day=`d.day`
 	if d.day<10:
 		day='0'+`d.day`	
 	key_name=key_name+'/'+`d.year`+'/'+month+'/'+day+'/'+machine_name+'.gz'
@@ -50,7 +46,6 @@ conn = boto.connect_s3(host=host,aws_access_key_id=access_key, aws_secret_access
                        calling_format = boto.s3.connection.OrdinaryCallingFormat(),)
 
 
-#conn.create_bucket(bucket_name)
 b = conn.get_bucket(bucket_name,True)
 if b != None:
     print b
